@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <style type="text/css">
+         body{margin:0;}
+         .demo2{ width:400px; border:1px #000 solid; margin: auto}
+         .content{height:50px; padding:50px;}
+         ul{margin:0; padding:0; list-style:none; overflow:hidden;}
+        ul li{width:100px; float:left; background-color:#fff; height:50px; line-height:50px; text-align:center; }
+        li.click{background-color:darkslategrey;}
+
+    </style>
+</head>
+<body>
+<div class="demo2">
+    <my-content :titles="titles1" :contents="contents1" ></my-content><p></p>
+    <my-content :titles="titles2" :contents="contents2" ></my-content>
+</div>
+
+<script>
+    Vue.component('my-content',{
+        template:`
+	               <div class="demo2">
+		              <ul>
+		                	<li v-for="(title,index) in titles"  :class="{click:index==value}" @click="select(index)">
+		                        	{{title}}
+		                    </li>
+	             	  </ul>
+		           <div class="content">
+		                {{contents[value]}}
+		           </div>
+	               </div>`,
+        props : ['titles','contents'],
+        data(){
+            return {
+                value : this.index
+            }
+        },
+        methods : {
+            select (index){
+                this.value = index;
+            }
+        }
+    })
+</script>
+
+ <script>
+    new Vue({
+        el : ".demo2",
+        data (){
+            return{
+                titles1 : ["选项卡1","选项卡2","选项卡3"],
+                contents1 : ["这是选项卡1的内容","这是选项卡2的内容","这是选项卡3的内容"],
+                n : 0,
+                titles2 : ["京东超市","数码电器","服饰美妆","京东生鲜"],
+                contents2 : ["休闲零食","空调冰箱","时尚领军","时令生鲜"]
+            }
+        }
+    })
+</script>
+</body>
+</html>

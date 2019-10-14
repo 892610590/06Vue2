@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="demo1">
+    <button @click="del()">-</button><input type="text" v-model="count"><button @click="add()">+</button>
+</div>
+<script>
+    new Vue({
+        el:"#demo1",
+        data(){
+            return{
+                count:'1'
+            }
+        },
+        methods:{
+            add(){this.count ++;},
+            del(){this.count --;}
+        },
+        watch:{
+            count(){
+                if(
+                    this.count<1){
+                    alert("最小为1")
+                    this.count=1;
+                }else{
+                    return count;
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
